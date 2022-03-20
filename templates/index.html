@@ -6,7 +6,7 @@
 </head>
 <body>
 	<header>
-		<h1>Editor de Massas - VZ</h1>
+		<h1>{{ titulo }}</h1>
 	</header>
 
 	<main>
@@ -18,30 +18,12 @@
 		<section>
 			<h2>campos para alteração</h2>
 			<form action="">
-				<label for="chpras">chpras</label>
-				<input type="text" value="00738651124">
-				<label for="data_transacao">data transacao</label>
-				<input type="text" value="2022-10-07">
-				<label for="hora_transacao">hora transacao</label>
-				<input type="text" value="12:32:41">
-				<label for="dn">dn</label>
-				<input type="text" value="01285">
-				<label for="indicador_cv">indicador cv</label>
-				<input type="text" value="N">
-				<label for="cf">cf</label>
-				<input type="text" value="02">
-				<label for="numero_documento">numero documento</label>
-				<input type="text" value="00004403589281">
-				<label for="indicador_titular">indicador titular</label>
-				<input type="text" value="0">
-				<label for="nome_estabelecimento">nome estabelecimento</label>
-				<input type="text" value="POSTO SAO SEBASTIAO">
-				<label for="tipo_pessoa">tipo pessoa</label>
-				<input type="text" value="F">
-				<label for="valor_moeda_transacao">valor moeda transacao</label>
-				<input type="text" value="000000000727272">
-				<label for="hash_cartao">hash cartao</label>
-				<input type="text" value="F28BE31DBAE83DB283B">
+				{% for identi, nome, valor in lista_campos %}
+					<label for={{ identi }}>
+						{{ nome }}
+					</label>
+					<input type="text" value={{ valor }}>
+				{% endfor %}
 				<button>atualizar</button>
 			</form>
 		</section>
