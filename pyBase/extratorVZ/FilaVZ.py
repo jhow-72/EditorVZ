@@ -1,4 +1,4 @@
-from Propriedades import PropriedadeVZ
+from pyBase.extratorVZ.Propriedades import PropriedadeVZ
 
 
 class FilaVZ:
@@ -26,11 +26,15 @@ class FilaVZ:
 
         self._fila = string_atualizada
 
+    # criado um metodo auxiliar para o replace pois a funcao built-in do python não me atende
+    # ou ela mudava todas as menções ao que eu estava procurando ou um número específcio
+    # não conseguia fazer ela trocar a partir de um determinado index
     def _replace_handler(self, parte_nova, propriedade):
         before = self._fila[:propriedade.i_primeiro_char]
         after = self._fila[propriedade.i_ultimo_char:]
         return before + parte_nova + after
 
+    # as funcoes abaixo são usadas para validar o q for necessário antes de fazer o replace
     def _replace_check_zfill(self, valor_novo, objeto_atual):
         if len(valor_novo) > objeto_atual.qtd_chars:
             raise ValueError(f"{objeto_atual.nome} deve ter {objeto_atual.qtd_chars} chars ou menos")
@@ -49,6 +53,10 @@ class FilaVZ:
             return valor_novo
 
 ############# Propriedades - valor #############
+
+    @property
+    def string(self):
+        return self._fila
 
     @property
     def chpras(self):
@@ -122,7 +130,7 @@ class FilaVZ:
         self._replace_check_exact(novo_indicador_cv, self._indic_cv)
         self._replace(novo_indicador_cv, self._indic_cv)
 
-    def CF_replace(self, nova_cf):
+    def cf_replace(self, nova_cf):
         self._replace_check_exact(nova_cf, self._CF_configuracao)
         self._replace(nova_cf, self._CF_configuracao)
 

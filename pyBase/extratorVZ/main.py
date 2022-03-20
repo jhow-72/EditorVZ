@@ -7,7 +7,7 @@ fila = '------------------------------------------------------------------------
 # print(fila)
 
 filaVZ = FilaVZ(fila)
-print(f'fila inicial:\t\t{filaVZ._fila}')
+print(f'fila inicial:\t\t{filaVZ.string}')
 
 # # # Teste do chpras
 # # print(f'CHPRAS:\t{filaVZ.chpras}')
@@ -69,7 +69,7 @@ filaVZ.data_transacao_replace('2019-08-27')
 filaVZ.hora_transacao_replace('12:32:41')
 filaVZ.dn_replace('1872')
 filaVZ.indicador_cartao_virtual_replace('N')
-filaVZ.CF_replace('51')
+filaVZ.cf_replace('51')
 filaVZ.numero_documento_replace('000044024873822')
 filaVZ.indic_titularidade_replace('0')
 filaVZ.nome_estabelecimento_replace('POSTO SAO SEBASTIAO')
@@ -79,7 +79,7 @@ filaVZ.hash_cartao_replace('F28BE31DBAE83DB283B')
 
 
 # print(f'fila original:\t\t{fila}')
-print(f'Fila atualizada:\t{filaVZ._fila}')
+print(f'Fila atualizada:\t{filaVZ.string}')
 
 
 
