@@ -131,7 +131,7 @@ class FilaVZ:
         self._replace(novo_numero_documento, self._numero_documento)
 
     def indic_titularidade_replace(self, novo_indicador_titularidade):
-        novo_indicador_titularidade = self._replace_check_exact(novo_indicador_titularidade, self._indic_titularidade)
+        self._replace_check_exact(novo_indicador_titularidade, self._indic_titularidade)
         self._replace(novo_indicador_titularidade, self._indic_titularidade)
 
     def nome_estabelecimento_replace(self, novo_nome_estabelecimento):
