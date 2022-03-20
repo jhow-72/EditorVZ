@@ -1,15 +1,34 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+import models
 
 app = Flask(__name__)
 
+lista_campos = models.CriaPropriedades()
+massa_default = '----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------'
 
 @app.route('/index')
 def ola():
-    lista_campos = [['chpras', 'CHPRAS', '00738651124'], ['data_transacao', 'data transacao', "2022-10-07"], ['hora_transacao', 'hora transacao', '12:32:41'], ['dn', 'DN', '01285'], ['indicador_cv', 'indicador cartão virtual', 'N'], ['cf', 'CF', '02'], ['numero_documento', 'número documento', '00004403589281'], ['indicador_titular', 'indicador titular', '0'], ['nome_estabelecimento', 'nome estabelecimento', 'Garoupa'], ['tipo_pessoa', 'tipo pessoa', 'F'], ['valor_moeda_transacao', 'valor moeda transação', '000000000727272'], ['hash_cartao', 'hash cartão', 'F28BE31DBAE83DB283B']]
-    for ident, nome, valor in lista_campos:
-        print(f'{ident}; {nome}; {valor}')
+    for campo in lista_campos:
+        print(f'{campo.id}; {campo.label}; {campo.value}')
 
-    return render_template('index.html', titulo='Editor de Massas - VZ', lista_campos=lista_campos)
+    return render_template('index.html', titulo='Editor de Massas - VZ', massa_default=massa_default, lista_campos=lista_campos, massa_atualizada=massa_default)
+
+@app.route('/atualizar-propertySet')
+def update():
+    chpras = request.form['chpras']
+    data_transacao = request.form['data_transacao']
+    hora_transacao = request.form['hora_transacao']
+    dn = request.form['dn']
+    indicador_cv = request.form['indicador_cv']
+    cf = request.form['cf']
+    numero_documento = request.form['numero_documento']
+    indicador_titular = request.form['indicador_titular']
+    nome_estabelecimento = request.form['nome_estabelecimento']
+    tipo_pessoa = request.form['tipo_pessoa']
+    valor_moeda_transacao = request.form['valor_moeda_transacao']
+    hash_cartao = request.form['hash_cartao']
+
+
 
 app.run()
 

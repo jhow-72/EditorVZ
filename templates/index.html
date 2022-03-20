@@ -10,27 +10,27 @@
 	</header>
 
 	<main>
-		<section>
+		<section id="Massa-Padrao">
 			<h2>Massa Padrão</h2>
-			<textarea name="Massa-Default" id="Massa-Default" cols="60" rows="12">----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------</textarea>
+			<textarea name="Massa-Default" id="Massa-Default" cols="60" rows="12">{{ massa_default }}</textarea>
 		</section>
 
-		<section>
+		<section id="Form">
 			<h2>campos para alteração</h2>
-			<form action="">
-				{% for identi, nome, valor in lista_campos %}
-					<label for={{ identi }}>
-						{{ nome }}
+			<form action="/atualizar" method="post">
+				{% for campo in lista_campos %}
+					<label for={{ campo.id }}>
+						{{ campo.label }}
 					</label>
-					<input type="text" value={{ valor }}>
+					<input type="text" id={{ campo.id }} name={{ campo.id }} value={{ campo.value }}>
 				{% endfor %}
 				<button>atualizar</button>
 			</form>
 		</section>
 
-		<section>
+		<section id="Massa-Nova">
 			<h2>Massa Atualizada</h2>
-			<textarea name="Massa-Atualizada" id="Massa-Atualizada" cols="60" rows="12"></textarea>
+			<textarea name="Massa-Atualizada" id="Massa-Atualizada" cols="60" rows="12">{{ massa_default }}</textarea>
 		</section>
 	</main>
 	<footer>
