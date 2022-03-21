@@ -2,7 +2,177 @@
 <html lang="pt-br">
 <head>
 	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
 	<title>Editor - Massa VZ</title>
+
+	<link rel="stylesheet" href="{{ url_for('static', filename='reset.css') }}">
+
+	<style>
+		body {
+    		font-family: 'Montserrat', sans-serif;
+			box-sizing: border-box;
+		}
+
+		header {
+    		background-color: orange;
+    		padding: 2% 0;
+			text-align: center;
+		}
+		h1 {
+			font-size: 2.5em;
+			font-weight: bold;
+		}
+
+		main {
+			width: 940px;
+			margin: auto;
+		}
+
+		#Form {
+			margin: 0 auto;
+			background: #FEFEFE;
+		}
+
+		.subtitulo-form {
+			font-size: 1.8em;
+			font-weight: bold;
+			text-align: center;
+			margin: 15px 0;
+		}
+
+		.campo {
+			width: 33%;
+			margin-bottom: 10px;
+			display: inline-block;
+			font-size: 20px;
+			
+		}
+
+		label {
+			display: block;
+			text-transform: capitalize;
+			text-align: center;
+			margin-bottom: 5px;
+		}
+
+		.input-padrao {
+			display: block;
+			width: 90%;
+			margin-bottom: 20px;
+			padding: 10px 10px;
+			border: #000000 solid 2px ;
+			transition: 0.3s all;
+			border-radius: 5px;
+			text-align: center;
+			font-size: 16px;
+		}
+
+		.input-padrao:focus {
+			background-color: #e7e7e7;
+		}
+
+		.container-botao {
+			height: 50px;
+			width: 940px;
+			position: relative;
+		}
+
+		.centralizar {
+			margin: 0;
+			position: absolute;
+			top: 50%;
+			left: 44.4%;
+			-ms-transform: translate(-50%, -50%);
+			transform: translate(-50%, -50%);
+		}
+
+		.atualizar {
+			display: block;
+			width: 200%;
+			padding: 10px 0;
+			background: orange;
+			color: black;
+			font-weight: bold;
+			font-size: 26px;
+			border: none;
+			border-radius: 5px;
+			transition: 0.5s all;
+			cursor: pointer;
+			margin-bottom: 15px;
+		}
+
+		.atualizar:hover {
+			background: darkorange;
+			color: black;
+			transform: scale(1.2);
+		}
+
+		#Massas {
+			margin: 5px;
+			margin-bottom: 20px;
+			display: flex;
+			justify-content: center;
+		}
+		
+		
+		.massa_padrao, .massa_atualizada {
+			display: inline-block;
+			margin: auto;
+			width: 49%;
+    		padding: 2%; 
+			padding-top: 0;
+		}
+
+		.subtitulo-massas {
+			font-size: 1.8em;
+			font-weight: bold;
+			text-align: center;
+			margin: 15px 0;
+			padding: 3px;
+		}
+
+		.textArea {
+			padding: 10px;
+			font-size: 15px;
+			border: #000000 solid 2px;
+			border-radius: 5px;
+		}
+
+		.container-botao-copiar{
+			display: flex;
+			justify-content: center;
+		}
+		
+		.botao-copiar {
+			display: block;
+			width: 25%;
+			padding: 10px 0;
+			background: orange;
+			color: black;
+			font-weight: bold;
+			font-size: 26px;
+			border: none;
+			border-radius: 5px;
+			transition: 0.5s all;
+			cursor: pointer;
+			margin-top: 10px;
+		}
+
+		.botao-copiar:hover {
+			background: darkorange;
+			color: black;
+			transform: scale(1.2);
+		}
+
+		footer {
+			background-color: orange;
+			padding: 2%;
+		}
+
+	</style>
+
+
 </head>
 <body>
 	<header>
@@ -10,33 +180,73 @@
 	</header>
 
 	<main>
-		<section id="Massa-Padrao">
-			<h2>Massa Padrão</h2>
-			<textarea name="Massa-Default" id="Massa-Default" cols="60" rows="12">{{ massa_default }}</textarea>
-		</section>
 
 		<section id="Form">
-			<h2>campos para alteração</h2>
+			<h2 class="subtitulo-form">Campos Para Alteração</h2>
 			<form action="/atualizar-propertySet" method="post">
 				{% for campo in lista_campos %}
-					<label for={{ campo.id }}>
-						{{ campo.label }}
-					</label>
-					<input type="text" id={{ campo.id }} name={{ campo.id }} value={{ campo.value }}>
+					<div class="campo">
+						<label for={{ campo.id }}>
+							{{ campo.label }}
+						</label>
+						<input class="input-padrao" type="text" id={{ campo.id }} name={{ campo.id }} value={{ campo.value }}>
+					</div>
 				{% endfor %}
-				<button>atualizar</button>
+				<div class="container-botao">
+					<div class="centralizar">
+						<button class="atualizar">atualizar</button>
+					</div>
+				</div>
 			</form>
 		</section>
 
-		<section id="Massa-Nova">
-			<h2>Massa Atualizada</h2>
-			<textarea name="Massa-Atualizada" id="Massa-Atualizada" cols="60" rows="12">{{ massa_atualizada }}</textarea>
+		<section id="Massas">
+			<div class="massa_padrao">
+				<h2 class="subtitulo-massas">Massa Padrão</h2>
+				<textarea class="textArea" name="Massa-Default" id="Massa-Default" cols="46" rows="14">{{ massa_default }}</textarea>
+				<div class="container-botao-copiar">
+					<button id="btnCopyDefault" class="botao-copiar">Copiar</button>
+				</div class="container-botao-copiar">
+			</div>
+
+			<div class="massa_atualizada">
+				<h2 class="subtitulo-massas">Massa Atualizada</h2>
+				<textarea class="textArea" name="Massa-Atualizada" id="Massa-Atualizada" cols="46" rows="14">{{ massa_atualizada }}</textarea>
+				<div class="container-botao-copiar">
+					<button id="btnCopyUpdated" class="botao-copiar">Copiar</button>
+				</div class="container-botao-copiar">
+			</div>
 		</section>
 	</main>
+
 	<footer>
-		<h2>final da pagina</h2>
 	</footer>
 
 
 </body>
+
+<script text="text/javascript">
+	const inpDef = document.getElementById("Massa-Default");
+	const inpUpd = document.getElementById("Massa-Atualizada");
+	const btnDef = document.getElementById("btnCopyDefault");
+	const btnUpd = document.getElementById("btnCopyUpdated");
+
+	btnDef.onclick = function() {
+		// Selecionando o texto
+		inpDef.select();
+
+		// copiando o texto
+		document.execCommand("Copy")
+	}
+
+	btnUpd.onclick = function() {
+		// Selecionando o texto
+		inpUpd.select();
+
+		// copiando o texto
+		document.execCommand("Copy")
+	}
+
+</script>
+
 </html>

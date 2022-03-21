@@ -4,8 +4,8 @@ from models import Property
 # retorna uma lista com o id, name(label) e value que será usado para criar os campos do form
 def CriaPropriedades(dicionario):
     chpras = Property('chpras', 'CHPRAS', dicionario['chpras'])
-    data = Property('data_transacao', 'data transacao', dicionario['data_transacao'])
-    hora = Property('hora_transacao', 'hora transacao', dicionario['hora_transacao'])
+    data = Property('data_transacao', 'data transação', dicionario['data_transacao'])
+    hora = Property('hora_transacao', 'hora transação', dicionario['hora_transacao'])
     dn = Property('dn', 'DN', dicionario['dn'])
     indicador_cv = Property('indicador_cv', 'indicador cartão Virtual', dicionario['indicador_cv'])
     cf = Property('cf', 'CF', dicionario['cf'])
