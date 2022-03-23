@@ -114,7 +114,6 @@ class FilaVZ:
         self._replace(novo_chpras, self._chpras)
 
     def data_transacao_replace(self, nova_data):
-
         self._replace_check_exact(nova_data, self._data_transacao)
         self._replace(nova_data, self._data_transacao)
 

@@ -1,18 +1,19 @@
 from flask import Flask, render_template, request
 import helpers
-from pyBase.extratorVZ.FilaVZ import FilaVZ
+from models import FilaVZ
+# from pyBase.extratorVZ.FilaVZ import FilaVZ
 
 app = Flask(__name__)
 
 # essas propriedades são as que aparecerão no index inicial
 propriedades_campos_para_alteracao = {
-    'chpras': '00738651124',
+    'chpras': '738651124',
     'data_transacao': '2022-10-07',
     'hora_transacao': '12:32:41',
     'dn': '01285',
     'indicador_cv': 'N',
     'cf': '02',
-    'numero_documento': '00004403589281',
+    'numero_documento': '4403589281',
     'indicador_titular': '0',
     'nome_estabelecimento': 'Garoupa',
     'tipo_pessoa': 'F',
@@ -21,9 +22,9 @@ propriedades_campos_para_alteracao = {
 }
 
 # gera as propriedades iniciais
-lista_campos = helpers.CriaPropriedades(propriedades_campos_para_alteracao)
 massa_default = '----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------'
 fila = FilaVZ(massa_default)
+lista_campos = helpers.CriaPropriedades(fila, fila.String, propriedades_campos_para_alteracao)
 
 # gera a pagina inicial, nesse estágio "massa_atualizada = massa_default" pois não houve nenhuma alteração ainda
 @app.route('/')
@@ -51,12 +52,13 @@ def propertySet():
         'hash_cartao': request.form['hash_cartao'],
     }
 
-    massa_atualizada = helpers.replace_values(fila, propriedades_campos_para_alteracao_atualizado)
-    lista_campos_atualizada = helpers.CriaPropriedades(propriedades_campos_para_alteracao_atualizado)
+    lista_campos_atualizada = helpers.CriaPropriedades(fila, fila.String, propriedades_campos_para_alteracao)
+    massa_atualizada = helpers.replace_values(fila, propriedades_campos_para_alteracao_atualizado, lista_campos_atualizada)
+    lista_campos_atualizada = helpers.CriaPropriedades(fila, massa_atualizada, propriedades_campos_para_alteracao_atualizado)
+
 
     # renderiza o template index.html com os valores atualizados
     return render_template('index.html', titulo='Editor de Massas - VZ', massa_default=massa_default, lista_campos=lista_campos_atualizada, massa_atualizada=massa_atualizada)
 
 app.run(debug=True)
-
 
