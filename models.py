@@ -13,7 +13,7 @@ class FilaVZ:
 
 # classe criada para os objetos colocados no formulario da pagina index
 class PropertyVZ:
-    def __init__(self, fila, string, id, label, value_default, inicio, numero_de_chars, zfill_check, exatc_check, spaces_check):
+    def __init__(self, fila, string, id, label, value_default, inicio, numero_de_chars, zfill_check, exact_check, spaces_check):
         self._fila = fila
         self._string = string
         self._id = id
@@ -23,7 +23,7 @@ class PropertyVZ:
         self._numero_de_chars = numero_de_chars
         self._ultimo_char = self._primeiro_char + numero_de_chars
         self._zfill_check = zfill_check
-        self._exatc_check = exatc_check
+        self._exact_check = exact_check
         self._spaces_check = spaces_check
         self._valor = None
         # self._valor = self._busca_substring_generica()
@@ -73,8 +73,8 @@ class PropertyVZ:
         return self._zfill_check
 
     @property
-    def exatc_check(self):
-        return self._exatc_check
+    def exact_check(self):
+        return self._exact_check
 
     @property
     def spaces_check(self):
