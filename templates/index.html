@@ -124,6 +124,10 @@
 			padding-top: 0;
 		}
 
+		.massa_padrao {
+			width: 100%;
+		}
+
 		.refresh-icon {
 			background: none;
 			color: orange;
@@ -155,7 +159,7 @@
 			display: flex;
 			justify-content: center;
 		}
-		
+
 		.botao-copiar {
 			display: block;
 			width: 25%;
@@ -219,7 +223,7 @@
 					<textarea class="textArea" name="Massa-Default" id="Massa-Default" cols="46" rows="14">{{ massa_default }}</textarea>
 					<div class="container-botao-copiar">
 						<button class="refresh-icon" type="submit"><i class="fa-solid fa-arrows-rotate"></i></button>
-					</div class="container-botao-copiar">
+					</div>
 				</div>
 			</form>
 
@@ -228,7 +232,7 @@
 				<textarea class="textArea" name="Massa-Atualizada" id="Massa-Atualizada" cols="46" rows="14">{{ massa_atualizada }}</textarea>
 				<div class="container-botao-copiar">
 					<button id="btnCopyUpdated" class="botao-copiar">Copiar</button>
-				</div class="container-botao-copiar">
+				</div>
 			</div>
 		</section>
 	</main>
@@ -238,18 +242,8 @@
 </body>
 
 <script text="text/javascript">
-	const inpDef = document.getElementById("Massa-Default");
 	const inpUpd = document.getElementById("Massa-Atualizada");
-	const btnDef = document.getElementById("btnCopyDefault");
 	const btnUpd = document.getElementById("btnCopyUpdated");
-
-	btnDef.onclick = function() {
-		// Selecionando o texto
-		inpDef.select();
-
-		// copiando o texto
-		document.execCommand("Copy")
-	}
 
 	btnUpd.onclick = function() {
 		// Selecionando o texto
