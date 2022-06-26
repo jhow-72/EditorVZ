@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 # essas propriedades são as que aparecerão no index inicial
 
-propriedades_campos_para_alteracao = helpers.cria_dicionario(True)
+propriedades_campos_para_alteracao = helpers.cria_dicionario(False, [])
 
 # gera as propriedades iniciais
 massa_default = '----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------'
@@ -32,6 +32,16 @@ def propertySet():
 
     # renderiza o template index.html com os valores atualizados
     return render_template('index.html', titulo='Editor de Massas - VZ', massa_default=massa_default, lista_campos=lista_campos_atualizada, massa_atualizada=massa_atualizada)
+
+@app.route('/atualizaMassaPadrao/<massa_atualizada>', methods=['POST'])
+def atualizaMassaPadrao(massa_atualizada):
+    string_padrão_nova = request.form['Massa-Default']
+
+    propriedades_campos_para_alteracao_atualizado = helpers.cria_dicionario(True, string_padrão_nova)
+    lista_campos_atualizada = helpers.CriaPropriedades(fila, fila.String, propriedades_campos_para_alteracao_atualizado)
+
+    return render_template('index.html', titulo='Editor de Massas - VZ', massa_default=string_padrão_nova, lista_campos=lista_campos_atualizada, massa_atualizada=massa_atualizada)
+
 
 app.run(debug=True)
 

@@ -24,8 +24,24 @@ def CriaPropriedades(fila, fila_string, dicionario):
     return lista_campos
 
 # o dicionario abaixo, contém os valores usados como exemplos iniciais nos campos de index.html
-def cria_dicionario(novo):
+def cria_dicionario(novo, string):
     if novo:
+        propriedades_campos_para_alteracao = {
+            'chpras': string[19:(19+11)],
+            'motivo_negada': string[65:(65+3)],
+            'data_transacao': string[68:(68+10)],
+            'hora_transacao': string[78:(78+8)],
+            'dn': string[117:(117+5)],
+            'indicador_cv': string[123:(123+1)],
+            'cf': string[124:(124+2)],
+            'numero_documento': string[135:(135+15)],
+            'indicador_titular': string[150:(150+1)],
+            'nome_estabelecimento': string[151:(151+45)],
+            'tipo_pessoa': string[256:(256+1)],
+            'valor_moeda_transacao': string[266:(266+15)],
+            'hash_cartao': string[540:(540+19)],
+        }
+    else:
         propriedades_campos_para_alteracao = {
             'chpras': '738651124',
             'motivo_negada': 'BND',
@@ -41,7 +57,7 @@ def cria_dicionario(novo):
             'valor_moeda_transacao': '000000000727272',
             'hash_cartao': 'F28BE31DBAE83DB283B',
         }
-        return propriedades_campos_para_alteracao
+    return propriedades_campos_para_alteracao
 
 
 def replace_values(fila, propriedades_campos_para_alteracao, lista_campos_atualizada):

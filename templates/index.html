@@ -124,6 +124,18 @@
 			padding-top: 0;
 		}
 
+		.refresh-icon {
+			background: none;
+			color: orange;
+			font-size: 48px;
+			border: none;
+			cursor: pointer;
+			display: flex;
+			justify-content: center;
+			display: block;
+			width: 25%;
+		}
+
 		.subtitulo-massas {
 			font-size: 1.8em;
 			font-weight: bold;
@@ -201,13 +213,15 @@
 		</section>
 
 		<section id="Massas">
-			<div class="massa_padrao">
-				<h2 class="subtitulo-massas">Massa Padrão</h2>
-				<textarea class="textArea" name="Massa-Default" id="Massa-Default" cols="46" rows="14">{{ massa_default }}</textarea>
-				<div class="container-botao-copiar">
-					<button id="btnCopyDefault" class="botao-copiar">Copiar</button>
-				</div class="container-botao-copiar">
-			</div>
+			<form action="{{url_for('atualizaMassaPadrao', massa_atualizada=massa_atualizada)}}" method="post">
+				<div class="massa_padrao">
+					<h2 class="subtitulo-massas">Massa Padrão</h2>
+					<textarea class="textArea" name="Massa-Default" id="Massa-Default" cols="46" rows="14">{{ massa_default }}</textarea>
+					<div class="container-botao-copiar">
+						<button class="refresh-icon" type="submit"><i class="fa-solid fa-arrows-rotate"></i></button>
+					</div class="container-botao-copiar">
+				</div>
+			</form>
 
 			<div class="massa_atualizada">
 				<h2 class="subtitulo-massas">Massa Atualizada</h2>
@@ -246,5 +260,5 @@
 	}
 
 </script>
-
+<script src="https://kit.fontawesome.com/ad8740c044.js" crossorigin="anonymous"></script>
 </html>
